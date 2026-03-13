@@ -13,7 +13,7 @@ export function Footer() {
             <a
               key={key}
               href={`#${key}`}
-              className="text-muted-foreground hover:text-accent transition-colors"
+              className="cursor-pointer text-muted-foreground hover:text-accent transition-colors"
             >
               {t(`nav.${key}`)}
             </a>

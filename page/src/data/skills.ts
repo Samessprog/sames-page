@@ -3,6 +3,8 @@ import type { Locale } from '@/i18n/types'
 export interface Skill {
   name: string
   icon: string
+  iconType?: 'emoji' | 'svg'
+  svgIcon?: string
 }
 
 export interface SkillCategory {
@@ -26,68 +28,75 @@ const categories: { key: string; skills: Skill[] }[] = [
   {
     key: 'cloud',
     skills: [
-      { name: 'AWS', icon: '☁' },
-      { name: 'GCP', icon: '🌐' },
-      { name: 'OVH', icon: '🖥' },
+      { name: 'AWS', icon: '☁️', iconType: 'svg', svgIcon: 'amazonaws.svg' },
+      { name: 'GCP', icon: '🌐', iconType: 'svg', svgIcon: 'googlecloud.svg' },
+      { name: 'OVH', icon: '🖥', iconType: 'svg', svgIcon: 'ovh.svg' },
     ],
   },
   {
     key: 'containers',
     skills: [
-      { name: 'Docker', icon: '🐳' },
-      { name: 'Kubernetes', icon: '☸' },
-      { name: 'Helm', icon: '⎈' },
-      { name: 'ArgoCD', icon: '🐙' },
+      { name: 'Docker', icon: '🐳', iconType: 'svg', svgIcon: 'docker.svg' },
+      { name: 'Kubernetes', icon: '☸️', iconType: 'svg', svgIcon: 'kubernetes.svg' },
+      { name: 'Helm', icon: '⎈', iconType: 'svg', svgIcon: 'helm.svg' },
+      { name: 'ArgoCD', icon: '🐙', iconType: 'svg', svgIcon: 'argo.svg' },
     ],
   },
   {
     key: 'iac',
     skills: [
-      { name: 'Terraform', icon: '🏗' },
-      { name: 'CloudFormation', icon: '☁' },
-      { name: 'Pulumi', icon: '🔶' },
-      { name: 'Ansible', icon: '🤖' },
+      { name: 'Terraform', icon: '🏗️', iconType: 'svg', svgIcon: 'terraform.svg' },
+      { name: 'Ansible', icon: '🤖', iconType: 'svg', svgIcon: 'ansible.svg' },
+      { name: 'CloudFormation', icon: '📋', iconType: 'svg', svgIcon: 'amazonaws.svg' },
     ],
   },
   {
     key: 'cicd',
     skills: [
-      { name: 'GitHub Actions', icon: '⚡' },
-      { name: 'GitLab CI', icon: '🦊' },
-      { name: 'Playwright', icon: '🎭' },
+      { name: 'GitHub', icon: '🐙', iconType: 'svg', svgIcon: 'github.svg' },
+      { name: 'GitLab', icon: '🦊', iconType: 'svg', svgIcon: 'gitlab.svg' },
+      { name: 'GitHub Actions', icon: '⚡', iconType: 'svg', svgIcon: 'githubactions.svg' },
+      { name: 'GitLab CI', icon: '🦊', iconType: 'svg', svgIcon: 'gitlab.svg' },
+      { name: 'Git', icon: '🌿', iconType: 'svg', svgIcon: 'git.svg' },
+      { name: 'Playwright', icon: '🎭', iconType: 'svg', svgIcon: 'playwright.svg' },
     ],
   },
   {
     key: 'observability',
     skills: [
-      { name: 'Prometheus', icon: '🔥' },
-      { name: 'Grafana', icon: '📊' },
-      { name: 'Loki', icon: '📝' },
+      { name: 'Prometheus', icon: '🔥', iconType: 'svg', svgIcon: 'prometheus.svg' },
+      { name: 'Grafana', icon: '📊', iconType: 'svg', svgIcon: 'grafana.svg' },
+      { name: 'Loki', icon: '📝', iconType: 'svg', svgIcon: 'grafana.svg' },
     ],
   },
   {
     key: 'databases',
     skills: [
-      { name: 'PostgreSQL', icon: '🐘' },
-      { name: 'MySQL', icon: '🗄' },
-      { name: 'DynamoDB', icon: '⚡' },
+      { name: 'PostgreSQL', icon: '🐘', iconType: 'svg', svgIcon: 'postgresql.svg' },
+      { name: 'MySQL', icon: '🗄️', iconType: 'svg', svgIcon: 'mysql.svg' },
+      { name: 'MongoDB', icon: '🍃', iconType: 'svg', svgIcon: 'mongodb.svg' },
+      { name: 'Redis', icon: '⚡', iconType: 'svg', svgIcon: 'redis.svg' },
+      { name: 'DynamoDB', icon: '🗂️', iconType: 'svg', svgIcon: 'amazondynamodb.svg' },
     ],
   },
   {
     key: 'languages',
     skills: [
-      { name: 'Python', icon: '🐍' },
-      { name: 'TypeScript', icon: '📘' },
-      { name: 'Bash/Shell', icon: '💻' },
+      { name: 'Python', icon: '🐍', iconType: 'svg', svgIcon: 'python.svg' },
+      { name: 'TypeScript', icon: '📘', iconType: 'svg', svgIcon: 'typescript.svg' },
+      { name: 'Bash/Shell', icon: '💻', iconType: 'svg', svgIcon: 'gnubash.svg' },
+      { name: 'Node.js', icon: '🟢', iconType: 'svg', svgIcon: 'nodedotjs.svg' },
+      { name: 'React', icon: '⚛️', iconType: 'svg', svgIcon: 'react.svg' },
+      { name: 'FastAPI', icon: '⚡', iconType: 'svg', svgIcon: 'fastapi.svg' },
     ],
   },
   {
     key: 'os',
     skills: [
-      { name: 'Linux', icon: '🐧' },
-      { name: 'Nginx', icon: '🌐' },
-      { name: 'Tailscale', icon: '🔒' },
-      { name: 'DNS/TCP/IP', icon: '🌍' },
+      { name: 'Linux', icon: '🐧', iconType: 'svg', svgIcon: 'linux.svg' },
+      { name: 'Nginx', icon: '🌐', iconType: 'svg', svgIcon: 'nginx.svg' },
+      { name: 'Tailscale', icon: '🔒', iconType: 'svg', svgIcon: 'tailscale.svg' },
+      { name: 'DNS/TCP/IP', icon: '🌍', iconType: 'svg', svgIcon: 'cloudflare.svg' },
     ],
   },
 ]

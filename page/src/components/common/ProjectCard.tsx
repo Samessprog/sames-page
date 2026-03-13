@@ -15,31 +15,50 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   return (
     <motion.div
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -6, scale: 1.02 }}
       onClick={onClick}
-      className={`group relative flex flex-col h-full rounded-xl border bg-surface/60 backdrop-blur-sm overflow-hidden
+      className={`group relative flex flex-col h-full rounded-xl border-2 bg-surface/60 backdrop-blur-sm overflow-hidden
                  transition-all duration-300 cursor-pointer
                  ${project.featured
-                   ? 'border-accent/50 shadow-[0_0_20px_var(--color-accent-glow),0_4px_24px_oklch(0_0_0/0.3)]'
-                   : 'border-border border-t-2 border-t-accent/30 shadow-[0_4px_16px_oklch(0_0_0/0.25)] hover:border-accent/50 hover:shadow-[0_0_28px_var(--color-accent-glow),0_4px_24px_oklch(0_0_0/0.4)]'
+                   ? 'border-accent/60 shadow-[0_0_30px_var(--color-accent-glow),0_8px_32px_oklch(0_0_0/0.3)] hover:shadow-[0_0_40px_var(--color-accent-glow),0_12px_40px_oklch(0_0_0/0.4)]'
+                   : 'border-border hover:border-accent/40 shadow-[0_4px_20px_oklch(0_0_0/0.2)] hover:shadow-[0_8px_32px_var(--color-accent-glow),0_8px_32px_oklch(0_0_0/0.3)]'
                  }`}
     >
+      {/* Top accent line */}
+      <div className={`h-1 w-full ${project.featured ? 'bg-gradient-to-r from-accent via-secondary to-accent' : 'bg-gradient-to-r from-transparent via-accent/30 to-transparent group-hover:via-accent/60'} transition-all duration-300`} />
+
       {/* Image area */}
-      <div className="relative">
-        <ProjectPlaceholder project={project} />
+      <div className="relative overflow-hidden">
+        <div className="transform transition-transform duration-500 group-hover:scale-105">
+          <ProjectPlaceholder project={project} />
+        </div>
         {project.featured && (
-          <span className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-accent/90 text-white text-xs font-semibold backdrop-blur-sm">
+          <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-accent/95 text-white text-xs font-bold backdrop-blur-sm
+                          shadow-[0_4px_12px_oklch(0_0_0/0.3)] border border-white/20
+                          flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
             {t('projects.core_badge')}
-          </span>
+          </div>
+        )}
+        {project.year && (
+          <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-surface/90 backdrop-blur-md text-xs font-mono text-accent border border-accent/30">
+            {project.year}
+          </div>
         )}
       </div>
 
       {/* Content area */}
-      <div className="flex flex-col flex-1 p-6 gap-3">
-        <h3 className="text-lg font-semibold text-foreground">{project.title}</h3>
-        <p className="text-sm text-muted-foreground line-clamp-2 flex-1">{project.description}</p>
+      <div className="flex flex-col flex-1 p-6 gap-4">
+        <div>
+          <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors mb-2">
+            {project.title}
+          </h3>
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+            {project.description}
+          </p>
+        </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mt-auto">
           {(() => {
             const MAX_TECH = 3
             const visibleTech = project.coreTech.slice(0, MAX_TECH)
@@ -47,12 +66,20 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
             return (
               <>
                 {visibleTech.map((tech) => (
-                  <Badge key={tech} variant="secondary" className="text-xs font-mono bg-surface-2 text-muted-foreground border-border">
+                  <Badge
+                    key={tech}
+                    variant="secondary"
+                    className="text-xs font-mono bg-surface-2/80 text-foreground/80 border border-border/50
+                              hover:border-accent/50 hover:text-accent transition-colors px-2.5 py-0.5"
+                  >
                     {tech}
                   </Badge>
                 ))}
                 {extraCount > 0 && (
-                  <Badge variant="secondary" className="text-xs font-mono bg-surface-2 text-muted-foreground border-border">
+                  <Badge
+                    variant="secondary"
+                    className="text-xs font-mono bg-accent/10 text-accent border border-accent/30 px-2.5 py-0.5"
+                  >
                     +{extraCount}
                   </Badge>
                 )}
@@ -61,19 +88,22 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           })()}
         </div>
 
-        <div className="flex gap-3 pt-1">
+        <div className="flex items-center gap-3 pt-2 border-t border-border/50">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors"
+              className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-accent transition-colors"
             >
-              <Github className="w-3.5 h-3.5" />
-              GitHub
+              <Github className="w-4 h-4" />
+              View Source
             </a>
           )}
+          <span className="ml-auto text-xs font-mono text-accent/60 group-hover:text-accent transition-colors">
+            Click to explore →
+          </span>
         </div>
       </div>
     </motion.div>

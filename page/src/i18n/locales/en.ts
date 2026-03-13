@@ -37,6 +37,8 @@ const en: Record<string, string> = {
 
   // Skills
   'skills.heading': 'Skills & Tools',
+  'skills.view.carousel': 'Carousel',
+  'skills.view.static': 'All Static',
   'skills.prev': 'Previous',
   'skills.next': 'Next',
   'skills.page': 'Page',
@@ -51,6 +53,9 @@ const en: Record<string, string> = {
   'projects.technologies': 'Technologies',
   'projects.view_github': 'View on GitHub',
   'projects.live_demo': 'Live Demo',
+  'projects.what_i_owned': 'What I Owned',
+  'projects.technical_highlights': 'Technical Highlights',
+  'projects.why_it_matters': 'Why It Matters',
 
   // Contact
   'contact.heading': "Let's Build Something",

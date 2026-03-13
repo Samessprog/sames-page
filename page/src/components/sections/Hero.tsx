@@ -89,7 +89,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 text-muted-foreground hover:text-accent transition-colors"
+        className="cursor-pointer absolute bottom-8 text-muted-foreground hover:text-accent transition-colors"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

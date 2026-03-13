@@ -37,6 +37,8 @@ const de: Record<string, string> = {
 
   // Skills
   'skills.heading': 'Fähigkeiten & Tools',
+  'skills.view.carousel': 'Karussell',
+  'skills.view.static': 'Alle statisch',
   'skills.prev': 'Zurück',
   'skills.next': 'Weiter',
   'skills.page': 'Seite',
@@ -51,6 +53,9 @@ const de: Record<string, string> = {
   'projects.technologies': 'Technologien',
   'projects.view_github': 'Auf GitHub ansehen',
   'projects.live_demo': 'Live Demo',
+  'projects.what_i_owned': 'Meine Verantwortung',
+  'projects.technical_highlights': 'Technische Highlights',
+  'projects.why_it_matters': 'Warum es wichtig ist',
 
   // Contact
   'contact.heading': 'Lass uns etwas bauen',

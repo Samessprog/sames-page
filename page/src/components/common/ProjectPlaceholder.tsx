@@ -9,7 +9,7 @@ interface ProjectPlaceholderProps {
 export function ProjectPlaceholder({ project, className = '' }: ProjectPlaceholderProps) {
   const langColor = project.language ? LANGUAGE_COLORS[project.language] ?? '#6B7280' : '#6B7280'
 
-  const src = project.images?.[0] ?? project.image
+  const src = project.images?.[0]
   if (src) {
     return (
       <div className={`aspect-[16/10] overflow-hidden rounded-t-xl ${className}`}>

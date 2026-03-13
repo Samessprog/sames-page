@@ -30,7 +30,7 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
 
   useEffect(() => {
     if (!open || !project) return
-    const imgs = project.images ?? (project.image ? [project.image] : [])
+    const imgs = project.images ?? []
     if (imgs.length <= 1) return
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft')  setActiveIdx(i => (i - 1 + imgs.length) % imgs.length)
@@ -43,7 +43,7 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
   if (!project) return null
 
   const langColor = project.language ? LANGUAGE_COLORS[project.language] ?? '#6B7280' : null
-  const imgs = project.images ?? (project.image ? [project.image] : [])
+  const imgs = project.images ?? []
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -105,7 +105,7 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
                     key={i}
                     onClick={() => setActiveIdx(i)}
                     className={cn(
-                      'shrink-0 w-16 h-10 rounded overflow-hidden border-2 transition-colors',
+                      'cursor-pointer shrink-0 w-16 h-10 rounded overflow-hidden border-2 transition-colors',
                       i === activeIdx ? 'border-accent' : 'border-transparent opacity-60 hover:opacity-100'
                     )}
                   >
@@ -125,6 +125,67 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
         <div className="px-6 pt-4">
           <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
         </div>
+
+        {/* What I Owned */}
+        {project.whatIOwned && project.whatIOwned.length > 0 && (
+          <>
+            <div className="px-6 py-4">
+              <Separator />
+            </div>
+            <div className="px-6 pb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-3">
+                {t('projects.what_i_owned')}
+              </h4>
+              <ul className="space-y-2">
+                {project.whatIOwned.map((item, index) => (
+                  <li key={index} className="text-sm text-muted-foreground leading-relaxed flex gap-3">
+                    <span className="text-accent flex-shrink-0 font-bold">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+
+        {/* Technical Highlights */}
+        {project.technicalHighlights && project.technicalHighlights.length > 0 && (
+          <>
+            <div className="px-6 py-4">
+              <Separator />
+            </div>
+            <div className="px-6 pb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-3">
+                {t('projects.technical_highlights')}
+              </h4>
+              <ul className="space-y-2">
+                {project.technicalHighlights.map((item, index) => (
+                  <li key={index} className="text-sm text-muted-foreground leading-relaxed flex gap-3">
+                    <span className="text-accent flex-shrink-0 font-bold">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+
+        {/* Why It Matters */}
+        {project.whyItMatters && (
+          <>
+            <div className="px-6 py-4">
+              <Separator />
+            </div>
+            <div className="px-6 pb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-3">
+                {t('projects.why_it_matters')}
+              </h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {project.whyItMatters}
+              </p>
+            </div>
+          </>
+        )}
 
         <div className="px-6 py-4">
           <Separator />

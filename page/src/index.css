@@ -111,7 +111,7 @@
   * {
     box-sizing: border-box;
     border-color: var(--border);
-    cursor: none !important;
+
   }
 
   html {
@@ -202,4 +202,14 @@
   background-color: var(--accent);
   vertical-align: text-bottom;
   animation: blink 1s step-end infinite;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

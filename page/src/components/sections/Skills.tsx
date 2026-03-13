@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { useTranslation } from '@/contexts/LanguageContext'
 import { getSkillCategories } from '@/data/skills'
 import type { Skill } from '@/data/skills'
+import { SkillIcon } from './SkillIcon'
+import { CategoryFilterButtons } from './CategoryFilterButtons'
+import { SkillGrid } from './SkillGrid'
 
 function MarqueeRow({ skills, direction }: { skills: Skill[]; direction: 'left' | 'right' }) {
   const animClass = direction === 'left' ? 'marquee-left' : 'marquee-right'
@@ -21,7 +25,7 @@ function MarqueeRow({ skills, direction }: { skills: Skill[]; direction: 'left' 
                        hover:border-accent/40 hover:shadow-[0_0_16px_var(--color-accent-glow)]
                        transition-all shrink-0"
           >
-            <span className="text-2xl leading-none">{skill.icon}</span>
+            <SkillIcon skill={skill} />
             <span className="text-sm font-medium md:text-base text-foreground whitespace-nowrap">
               {skill.name}
             </span>
@@ -35,6 +39,7 @@ function MarqueeRow({ skills, direction }: { skills: Skill[]; direction: 'left' 
 export function Skills() {
   const { locale, t } = useTranslation()
   const categories = getSkillCategories(locale)
+  const [view, setView] = useState<'grid' | 'carousel'>('carousel')
 
   // Flatten all skills into a single list
   const allSkills = categories.flatMap((cat) => cat.skills)
@@ -58,12 +63,20 @@ export function Skills() {
         <span className="flex-1 h-px bg-gradient-to-r from-border to-transparent self-center" />
       </motion.h2>
 
-      <div className="space-y-8">
-        {/* Top row → scrolls right */}
-        <MarqueeRow skills={topRow} direction="right" />
-        {/* Bottom row → scrolls left */}
-        <MarqueeRow skills={bottomRow} direction="left" />
-      </div>
+      {/* View Toggle */}
+      <CategoryFilterButtons currentView={view} onViewChange={setView} />
+
+      {/* Conditional Rendering based on view */}
+      {view === 'carousel' ? (
+        <div className="space-y-8">
+          {/* Top row → scrolls right */}
+          <MarqueeRow skills={topRow} direction="right" />
+          {/* Bottom row → scrolls left */}
+          <MarqueeRow skills={bottomRow} direction="left" />
+        </div>
+      ) : (
+        <SkillGrid categories={categories} />
+      )}
     </SectionWrapper>
   )
 }

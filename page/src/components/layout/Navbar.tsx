@@ -50,7 +50,7 @@ export function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <a href="#hero" className="font-mono text-accent font-semibold tracking-tight hover:opacity-80 transition-opacity">
+          <a href="#hero" className="cursor-pointer font-mono text-accent font-semibold tracking-tight hover:opacity-80 transition-opacity">
             szymon<span className="text-secondary">@</span>devbox
           </a>
 
@@ -61,7 +61,7 @@ export function Navbar() {
               <a
                 href={link.href}
                 className={cn(
-                  'text-sm px-3 py-2 transition-colors inline-block',
+                  'cursor-pointer text-sm px-3 py-2 transition-colors inline-block',
                   active === link.id ? 'text-accent' : 'text-muted-foreground hover:text-accent',
                 )}
               >
@@ -101,7 +101,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'text-lg font-medium transition-colors',
+                    'cursor-pointer text-lg font-medium transition-colors',
                     active === link.id ? 'text-accent' : 'text-foreground hover:text-accent',
                   )}
                 >
@@ -117,7 +117,7 @@ export function Navbar() {
                     key={l}
                     onClick={() => setLocale(l)}
                     className={cn(
-                      'px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
+                      'cursor-pointer px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
                       locale === l
                         ? 'bg-accent text-background'
                         : 'text-muted-foreground hover:text-foreground hover:bg-surface-2',

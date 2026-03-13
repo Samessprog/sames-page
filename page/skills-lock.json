@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "design-exploration": {
+      "source": "carson2222/skills",
+      "sourceType": "github",
+      "computedHash": "6e9166c6e1141b35666036d22f24f5071cbb66569ed2a97dd5ed59b6578e1b2c"
+    }
+  }
+}

@@ -47,7 +47,7 @@ export function Contact() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-8 max-w-5xl mx-auto">
         {/* Left — Form card */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -116,7 +116,7 @@ export function Contact() {
 
             <button
               type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 bg-accent text-background font-mono text-sm py-2.5 rounded-lg
+              className="cursor-pointer w-full inline-flex items-center justify-center gap-2 bg-accent text-background font-mono text-sm py-2.5 rounded-lg
                          hover:opacity-90 transition-opacity"
             >
               <Send className="w-4 h-4" />
@@ -140,7 +140,7 @@ export function Contact() {
               href={href}
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface/60 backdrop-blur-sm
+              className="cursor-pointer flex items-center gap-4 p-4 rounded-xl border border-border bg-surface/60 backdrop-blur-sm
                          shadow-[0_2px_8px_oklch(0_0_0/0.2)]
                          hover:border-accent/40 hover:bg-surface hover:shadow-[0_0_16px_var(--color-accent-glow)]
                          transition-all group"
