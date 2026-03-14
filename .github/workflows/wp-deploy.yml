@@ -37,4 +37,8 @@ jobs:
           aws-region: ${{ secrets.BUCKET_REGION }}
 
       - name: Sync dist to S3
-        run: aws s3 sync page/dist s3://${{ secrets.BUCKET_NAME_WP }} --delete
+        run: |
+          aws s3 sync page/dist s3://${{ secrets.BUCKET_NAME_WP }} --delete
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
