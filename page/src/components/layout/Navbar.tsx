@@ -1,9 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Menu } from 'lucide-react'
-import { motion } from 'motion/react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { useTranslation } from '@/contexts/LanguageContext'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
@@ -15,9 +11,31 @@ import { cn } from '@/lib/utils'
 const NAV_KEYS = ['about', 'strengths', 'experience', 'skills', 'projects', 'contact'] as const
 
 const LOCALE_LABELS: Record<Locale, string> = {
-  en: 'English',
-  pl: 'Polski',
-  de: 'Deutsch',
+  en: 'EN',
+  pl: 'PL',
+  de: 'DE',
+}
+
+function HamburgerIcon({ open }: { open: boolean }) {
+  return (
+    <div className="w-5 h-4 relative flex flex-col justify-between">
+      <motion.span
+        className="block h-0.5 w-full bg-current rounded-full origin-center"
+        animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+        transition={{ duration: 0.25 }}
+      />
+      <motion.span
+        className="block h-0.5 w-full bg-current rounded-full"
+        animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+        transition={{ duration: 0.15 }}
+      />
+      <motion.span
+        className="block h-0.5 w-full bg-current rounded-full origin-center"
+        animate={open ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+        transition={{ duration: 0.25 }}
+      />
+    </div>
+  )
 }
 
 export function Navbar() {
@@ -30,6 +48,25 @@ export function Navbar() {
     const handler = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
+  }, [])
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  const handleNavClick = useCallback((href: string) => {
+    setOpen(false)
+    // Small delay so the menu animates out before scrolling
+    setTimeout(() => {
+      const el = document.querySelector(href)
+      el?.scrollIntoView({ behavior: 'smooth' })
+    }, 150)
   }, [])
 
   const navLinks = NAV_KEYS.map((key) => ({
@@ -82,57 +119,112 @@ export function Navbar() {
         {/* Desktop right controls */}
         <div className="hidden md:flex items-center gap-2">
           <LanguageSwitcher />
-          <Separator orientation="vertical" className="h-5" />
+          <div className="w-px h-5 bg-border" />
           <ThemeToggle />
         </div>
 
-        {/* Mobile hamburger */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden text-muted-foreground hover:text-accent">
-              <Menu className="w-5 h-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="bg-surface border-border w-64">
-            <nav className="flex flex-col gap-6 pt-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    'cursor-pointer text-lg font-medium transition-colors',
-                    active === link.id ? 'text-accent' : 'text-foreground hover:text-accent',
-                  )}
+        {/* Mobile hamburger button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className={cn(
+            'md:hidden relative z-[60] w-10 h-10 flex items-center justify-center rounded-lg transition-colors cursor-pointer',
+            open ? 'text-accent' : 'text-muted-foreground hover:text-accent',
+          )}
+          aria-label="Toggle menu"
+        >
+          <HamburgerIcon open={open} />
+        </button>
+
+        {/* Mobile fullscreen overlay menu */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-50 md:hidden"
+            >
+              {/* Backdrop */}
+              <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col h-full px-6 pt-24 pb-8">
+                {/* Nav links */}
+                <nav className="flex-1 flex flex-col justify-center gap-1">
+                  {navLinks.map((link, i) => (
+                    <motion.a
+                      key={link.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ delay: i * 0.05, duration: 0.25 }}
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleNavClick(link.href)
+                      }}
+                      className={cn(
+                        'group flex items-center gap-3 py-3 px-4 rounded-lg transition-colors cursor-pointer',
+                        active === link.id
+                          ? 'bg-accent/10 text-accent'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-surface',
+                      )}
+                    >
+                      {/* Active indicator bar */}
+                      <span
+                        className={cn(
+                          'w-0.5 h-5 rounded-full transition-colors shrink-0',
+                          active === link.id ? 'bg-accent' : 'bg-transparent group-hover:bg-border',
+                        )}
+                      />
+                      {/* Terminal prompt */}
+                      <span className="font-mono text-xs text-muted-foreground shrink-0 w-6">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      {/* Label */}
+                      <span className="text-lg font-medium tracking-wide">
+                        {link.label}
+                      </span>
+                    </motion.a>
+                  ))}
+                </nav>
+
+                {/* Bottom controls */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ delay: 0.2, duration: 0.25 }}
+                  className="border-t border-border pt-6"
                 >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-            <Separator className="my-6" />
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-2">
-                {LOCALES.map((l: Locale) => (
-                  <button
-                    key={l}
-                    onClick={() => setLocale(l)}
-                    className={cn(
-                      'cursor-pointer px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
-                      locale === l
-                        ? 'bg-accent text-background'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-surface-2',
-                    )}
-                  >
-                    {LOCALE_LABELS[l]}
-                  </button>
-                ))}
+                  <div className="flex items-center justify-between">
+                    {/* Language pills */}
+                    <div className="flex gap-2">
+                      {LOCALES.map((l: Locale) => (
+                        <button
+                          key={l}
+                          onClick={() => setLocale(l)}
+                          className={cn(
+                            'cursor-pointer px-3 py-1.5 rounded-md text-sm font-mono font-medium transition-all',
+                            locale === l
+                              ? 'bg-accent text-background shadow-sm shadow-accent-glow'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-surface-2',
+                          )}
+                        >
+                          {LOCALE_LABELS[l]}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Theme toggle */}
+                    <ThemeToggle />
+                  </div>
+                </motion.div>
               </div>
-              <div className="flex items-center">
-                <ThemeToggle />
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </motion.header>
   )

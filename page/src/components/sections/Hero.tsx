@@ -37,7 +37,7 @@ export function Hero() {
         {/* Name */}
         <motion.h1
           variants={childVariant}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
+          className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-tight"
         >
           <span className="text-accent">{personal.firstName}</span>{' '}
           <span className="text-foreground">{personal.lastName}</span>
@@ -46,7 +46,7 @@ export function Hero() {
         {/* Title */}
         <motion.p
           variants={childVariant}
-          className="text-xl text-muted-foreground font-mono"
+          className="text-lg sm:text-xl text-muted-foreground font-mono"
         >
           {personal.title}
         </motion.p>
@@ -72,12 +72,12 @@ export function Hero() {
         {/* CTAs */}
         <motion.div
           variants={childVariant}
-          className="flex flex-wrap gap-4 justify-center"
+          className="flex flex-wrap gap-3 sm:gap-4 w-full sm:w-auto justify-center"
         >
-          <Button asChild size="lg" className="bg-accent text-background hover:bg-accent-dim font-semibold">
+          <Button asChild size="lg" className="w-full sm:w-auto bg-accent text-background hover:bg-accent-dim font-semibold">
             <a href="#projects">{t('hero.cta.projects')}</a>
           </Button>
-          <Button asChild size="lg" variant="outline" className="border-border text-foreground hover:border-accent hover:text-accent">
+          <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-border text-foreground hover:border-accent hover:text-accent">
             <a href="#contact">{t('hero.cta.contact')}</a>
           </Button>
         </motion.div>

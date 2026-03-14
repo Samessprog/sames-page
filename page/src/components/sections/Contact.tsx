@@ -65,7 +65,7 @@ export function Contact() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="px-6 pt-6 pb-6 space-y-5">
+          <form onSubmit={handleSubmit} className="px-4 pt-4 pb-4 sm:px-6 sm:pt-6 sm:pb-6 space-y-5">
             <div>
               <label className="text-xs font-mono text-accent block mb-1.5">
                 {t('contact.form.name')}
@@ -140,7 +140,7 @@ export function Contact() {
               href={href}
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
-              className="cursor-pointer flex items-center gap-4 p-4 rounded-xl border border-border bg-surface/60 backdrop-blur-sm
+              className="cursor-pointer flex items-center gap-4 p-3 sm:p-4 rounded-xl border border-border bg-surface/60 backdrop-blur-sm
                          shadow-[0_2px_8px_oklch(0_0_0/0.2)]
                          hover:border-accent/40 hover:bg-surface hover:shadow-[0_0_16px_var(--color-accent-glow)]
                          transition-all group"
@@ -163,7 +163,7 @@ export function Contact() {
                 <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
               </div>
             </div>
-            <pre className="p-4 text-sm font-mono text-muted-foreground leading-relaxed overflow-x-auto">
+            <pre className="p-3 sm:p-4 text-xs sm:text-sm font-mono text-muted-foreground leading-relaxed overflow-x-auto">
               <code>
                 <span className="block">
                   <span className="text-accent">{t('contact.yaml.availability')}</span>

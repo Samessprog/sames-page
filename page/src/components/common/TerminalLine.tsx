@@ -24,14 +24,14 @@ export function TerminalLine() {
         <span className="ml-2 text-muted-foreground text-xs">terminal</span>
       </div>
       {/* Terminal body */}
-      <div className="px-4 py-4 space-y-1 min-h-[90px]">
+      <div className="px-4 py-4 space-y-1 min-h-[80px] sm:min-h-[90px]">
         <p className="text-muted-foreground text-xs">Last login: Wed Mar 11 09:00:00 2026</p>
         <p className="flex items-center gap-1">
           <span className="text-[oklch(0.80_0.18_195)]">szymon@devbox</span>
           <span className="text-muted-foreground">:</span>
           <span className="text-[oklch(0.75_0.18_145)]">~</span>
           <span className="text-muted-foreground">$</span>
-          <span className="text-foreground ml-1">{displayed}</span>
+          <span className="text-foreground ml-1 break-all">{displayed}</span>
           <span className="cursor-blink" />
         </p>
       </div>

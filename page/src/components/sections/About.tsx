@@ -68,7 +68,7 @@ export function About() {
             ))}
           </ul>
 
-          <div className="flex gap-4 pt-1">
+          <div className="flex flex-wrap gap-4 pt-1">
             <a href={personal.github} target="_blank" rel="noopener noreferrer"
                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent transition-colors">
               <Github className="w-4 h-4" />
@@ -117,7 +117,7 @@ export function About() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="flex justify-center md:justify-end"
         >
-          <div className="relative w-44 h-52 sm:w-56 sm:h-[272px]">
+          <div className="relative w-36 h-44 sm:w-56 sm:h-[272px]">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/35 to-secondary/25 blur-xl" />
             <div className="relative w-full h-full rounded-2xl border-2 border-accent/40 overflow-hidden
                            shadow-[0_8px_32px_oklch(0_0_0/0.4)]">

@@ -48,7 +48,7 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="p-0 gap-0 sm:max-w-4xl max-h-[96vh]">
-        <DialogHeader className="p-6 pb-4">
+        <DialogHeader className="p-4 pb-3 sm:p-6 sm:pb-4">
           <div className="flex items-center gap-3">
             <DialogTitle className="text-xl font-bold">{project.title}</DialogTitle>
             {langColor && (
@@ -71,7 +71,7 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
 
         {/* Image area */}
         {imgs.length > 0 ? (
-          <div className="px-6 space-y-2">
+          <div className="px-4 sm:px-6 space-y-2">
             <div className="relative aspect-[16/10] overflow-hidden rounded-xl group">
               <img
                 src={imgs[activeIdx]}
@@ -116,23 +116,23 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
             )}
           </div>
         ) : (
-          <div className="px-6">
+          <div className="px-4 sm:px-6">
             <ProjectPlaceholder project={project} className="!rounded-xl" />
           </div>
         )}
 
         {/* Description */}
-        <div className="px-6 pt-4">
+        <div className="px-4 sm:px-6 pt-4">
           <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
         </div>
 
         {/* What I Owned */}
         {project.whatIOwned && project.whatIOwned.length > 0 && (
           <>
-            <div className="px-6 py-4">
+            <div className="px-4 sm:px-6 py-4">
               <Separator />
             </div>
-            <div className="px-6 pb-4">
+            <div className="px-4 sm:px-6 pb-4">
               <h4 className="text-sm font-semibold text-foreground mb-3">
                 {t('projects.what_i_owned')}
               </h4>
@@ -151,10 +151,10 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
         {/* Technical Highlights */}
         {project.technicalHighlights && project.technicalHighlights.length > 0 && (
           <>
-            <div className="px-6 py-4">
+            <div className="px-4 sm:px-6 py-4">
               <Separator />
             </div>
-            <div className="px-6 pb-4">
+            <div className="px-4 sm:px-6 pb-4">
               <h4 className="text-sm font-semibold text-foreground mb-3">
                 {t('projects.technical_highlights')}
               </h4>
@@ -173,10 +173,10 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
         {/* Why It Matters */}
         {project.whyItMatters && (
           <>
-            <div className="px-6 py-4">
+            <div className="px-4 sm:px-6 py-4">
               <Separator />
             </div>
-            <div className="px-6 pb-4">
+            <div className="px-4 sm:px-6 pb-4">
               <h4 className="text-sm font-semibold text-foreground mb-3">
                 {t('projects.why_it_matters')}
               </h4>
@@ -187,12 +187,12 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
           </>
         )}
 
-        <div className="px-6 py-4">
+        <div className="px-4 sm:px-6 py-4">
           <Separator />
         </div>
 
         {/* Technologies */}
-        <div className="px-6 pb-2">
+        <div className="px-4 sm:px-6 pb-2">
           <h4 className="text-sm font-semibold text-foreground mb-3">{t('projects.technologies')}</h4>
           <div className="flex flex-wrap gap-2">
             {project.tech.map((tech) => (
@@ -204,7 +204,7 @@ export function ProjectDetailModal({ project, open, onOpenChange }: ProjectDetai
         </div>
 
         {/* Links */}
-        <div className="flex gap-3 p-6 pt-4">
+        <div className="flex gap-3 p-4 pt-3 sm:p-6 sm:pt-4">
           {project.github && (
             <Button asChild variant="outline" size="sm">
               <a href={project.github} target="_blank" rel="noopener noreferrer">

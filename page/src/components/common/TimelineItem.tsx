@@ -36,7 +36,7 @@ export function TimelineItem({ item, index, isCurrent }: TimelineItemProps) {
       </div>
 
       {/* Card */}
-      <div className="border border-border rounded-xl bg-surface/50 p-6
+      <div className="border border-border rounded-xl bg-surface/50 p-4 sm:p-6
                       hover:border-accent/50 hover:shadow-[0_0_24px_var(--color-accent-glow)]
                       transition-all duration-300 space-y-3">
         {/* Header */}

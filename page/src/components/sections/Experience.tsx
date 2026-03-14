@@ -58,13 +58,13 @@ export function Experience() {
           >
             <button
               onClick={handleLoadMore}
-              className="cursor-pointer group relative px-8 py-4 rounded-lg border-2 border-border bg-surface/60 backdrop-blur-sm
+              className="cursor-pointer group relative px-5 py-3 sm:px-8 sm:py-4 rounded-lg border-2 border-border bg-surface/60 backdrop-blur-sm
                          hover:border-accent/50 hover:bg-surface/80
                          transition-all duration-300
                          shadow-[0_2px_12px_oklch(0_0_0/0.2)]
                          hover:shadow-[0_4px_20px_var(--color-accent-glow),0_0_40px_var(--color-accent-glow)]"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <Terminal className="w-4 h-4 text-accent group-hover:animate-pulse" />
                 <span className="font-mono text-sm text-foreground">
                   <span className="text-accent">$</span> load --more-experience
@@ -88,13 +88,13 @@ export function Experience() {
           >
             <button
               onClick={handleShowLess}
-              className="cursor-pointer group relative px-8 py-4 rounded-lg border-2 border-border bg-surface/60 backdrop-blur-sm
+              className="cursor-pointer group relative px-5 py-3 sm:px-8 sm:py-4 rounded-lg border-2 border-border bg-surface/60 backdrop-blur-sm
                          hover:border-accent/50 hover:bg-surface/80
                          transition-all duration-300
                          shadow-[0_2px_12px_oklch(0_0_0/0.2)]
                          hover:shadow-[0_4px_20px_var(--color-accent-glow),0_0_40px_var(--color-accent-glow)]"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <Terminal className="w-4 h-4 text-accent group-hover:animate-pulse" />
                 <span className="font-mono text-sm text-foreground">
                   <span className="text-accent">$</span> load --less-experience
