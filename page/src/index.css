@@ -13,8 +13,8 @@
   --accent: oklch(0.50 0.22 275);
   --accent-dim: oklch(0.40 0.18 275);
   --accent-glow: oklch(0.50 0.22 275 / 0.25);
-  --secondary: oklch(0.52 0.18 80);
-  --secondary-dim: oklch(0.40 0.14 80);
+  --secondary: oklch(0.52 0.14 195);
+  --secondary-dim: oklch(0.40 0.11 195);
   --muted: oklch(0.90 0.005 240);
   --muted-foreground: oklch(0.45 0.01 240);
 
@@ -44,8 +44,8 @@
   --accent: oklch(0.75 0.20 275);
   --accent-dim: oklch(0.60 0.16 275);
   --accent-glow: oklch(0.75 0.20 275 / 0.25);
-  --secondary: oklch(0.75 0.18 80);
-  --secondary-dim: oklch(0.60 0.14 80);
+  --secondary: oklch(0.78 0.14 195);
+  --secondary-dim: oklch(0.62 0.11 195);
   --muted: oklch(0.225 0.008 240);
   --muted-foreground: oklch(0.65 0.01 240);
 
@@ -79,7 +79,7 @@
   --color-accent-dim: var(--accent-dim);
   --color-accent-glow: var(--accent-glow);
 
-  /* Secondary — terminal green */
+  /* Secondary — terminal cyan */
   --color-secondary: var(--secondary);
   --color-secondary-dim: var(--secondary-dim);
 
@@ -157,11 +157,11 @@
     z-index: 0;
   }
 
-  /* Secondary amber glow bottom-right */
+  /* Secondary cyan glow bottom-right */
   .dark body {
     background-image: radial-gradient(
       ellipse 50% 40% at 100% 100%,
-      oklch(0.75 0.18 80 / 0.04) 0%,
+      oklch(0.78 0.14 195 / 0.04) 0%,
       transparent 70%
     );
   }
